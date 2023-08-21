@@ -11,7 +11,7 @@ export class CsvReader extends BaseReader {
     const csvText = await response.text();
     const lines = csvText.trim().split('\n');
 
-    const headers = lines[0].split(',');
+
     const data: Room[] = [];
 
     for (let i = 1; i < lines.length; i++) {
@@ -19,8 +19,8 @@ export class CsvReader extends BaseReader {
       const room: Room = {
         number: values[0],
         type: values[1],
-        occupancy: Number(values[2]), // Convert occupancy to a number
-        price: parseFloat(values[3]), // Convert price to a number
+        occupancy: Number(values[2]),
+        price: parseFloat(values[3]),
       };
 
       data.push(room);
