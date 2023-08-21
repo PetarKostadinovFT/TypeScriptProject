@@ -1,0 +1,20 @@
+[
+    {
+        "number": "201",
+        "type": "Standard",
+        "occupancy": 2,
+        "price": 120
+    },
+    {
+        "number": "202",
+        "type": "Deluxe",
+        "occupancy": 3,
+        "price": 180
+    },
+    {
+        "number": "203",
+        "type": "Suite",
+        "occupancy": 4,
+        "price": 300
+    }
+]
