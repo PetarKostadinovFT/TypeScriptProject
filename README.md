@@ -6,18 +6,11 @@ The Hotel Information App is a web application that loads and displays informati
 
 ## Installation
 
-1. Initialize the project:
-   ```sh
-   npm init, 
-2. 
-   npm install, 
-3.   
-   npx tsc
-4. 
-
-    npx tsc -w
+1. npm init
+2. npm install
 
 ## Usage
+
 After installing the dependencies and compiling TypeScript, start the app by opening index.html in a web browser with the Live Server extension.
 
 The app displays information for two hotels.
@@ -27,4 +20,5 @@ Click the "Hotel Two json-info" button to load and show hotel information from a
 Click the "Hotel One csv-info" button to load and show hotel information from a CSV file.
 
 ## License
+
 This project is licensed under the Financial Times License.

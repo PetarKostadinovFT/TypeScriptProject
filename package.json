@@ -16,5 +16,9 @@
   "dependencies": {
     "csv-parser": "^3.0.0",
     "fs-extra": "^11.1.1"
-  }
+  },
+  "description": "## Description",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

@@ -13,7 +13,7 @@ const initApp = (): void => {
   const csvButton = document.getElementById('csvButton');
   const jsonButton = document.getElementById('jsonButton');
   const infoContainer = document.getElementById('infoContainer');
-  const headerText = document.getElementById('headerText');
+  const headerText = document.getElementById('titleDoc');
 
   csvButton?.addEventListener('click', async () => {
     const rooms: Room[] = await csvDisplay.getRoomData();
