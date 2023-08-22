@@ -1,25 +1,27 @@
 import { BaseReader } from './BaseReader.js';
 import { Room } from '../interfaces/Room.js';
+import { Cache } from '../interfaces/Cache.js'
 
-export class JsonReader implements BaseReader {
-  private static cachedData: Record<string, Room[]> = {};
 
-  static async readData(filePath: string): Promise<Room[]> {
-    if (JsonReader.cachedData[filePath]) {
-      return JsonReader.cachedData[filePath];
+
+export class JsonReader {
+  // Static property to hold cached data
+  private static cachedData: Cache = {};
+
+  static async readData(filePath: string): Promise<any> {
+    if (this.cachedData[filePath]) {
+      return this.cachedData[filePath];
     }
 
     const response = await fetch(filePath);
+
     if (!response.ok) {
       throw new Error(`Failed to fetch JSON data from ${filePath}`);
     }
 
-    const json = await response.json();
-    JsonReader.cachedData[filePath] = json;
-    return json as Room[];
-  }
+    const jsonData = await response.json();
+    this.cachedData[filePath] = jsonData;
 
-  async readData(filePath: string): Promise<Room[]> {
-    return JsonReader.readData(filePath);
+    return jsonData;
   }
 }

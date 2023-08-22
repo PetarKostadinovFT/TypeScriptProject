@@ -34,7 +34,7 @@ jsonButton?.addEventListener('click', async () => {
   }
 });
 
-function displayRooms(container: HTMLElement | null, rooms: Room[]): void {
+export function displayRooms(container: HTMLElement | null, rooms: Room[]): void {
   if (!container) return;
 
   container.innerHTML = '';
@@ -59,7 +59,7 @@ function displayRooms(container: HTMLElement | null, rooms: Room[]): void {
   });
 }
 
-function updateHeaderText(text: string): void {
+export function updateHeaderText(text: string): void {
   if (headerText) {
     headerText.textContent = text;
   }

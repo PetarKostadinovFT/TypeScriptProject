@@ -1,7 +1,6 @@
 import { BaseReader } from '../readers/BaseReader.js';
 import { Room } from '../interfaces/Room.js';
 
-
 export class Display {
   private reader: typeof BaseReader;
   private filePath: string;

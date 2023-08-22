@@ -2,6 +2,9 @@ import { BaseReader } from './BaseReader.js';
 import { Room } from '../interfaces/Room.js';
 
 export class CsvReader extends BaseReader {
+  static mockImplementation(arg0: () => { readData: jest.Mock<any, any, any>; }) {
+    throw new Error('Method not implemented.');
+  }
   private static cachedData: Room[] | null = null;
 
   static async readData(filePath: string): Promise<Room[]> {

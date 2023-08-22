@@ -1,5 +1,8 @@
 import { BaseReader } from './BaseReader.js';
 export class CsvReader extends BaseReader {
+    static mockImplementation(arg0) {
+        throw new Error('Method not implemented.');
+    }
     static async readData(filePath) {
         if (CsvReader.cachedData) {
             return CsvReader.cachedData;

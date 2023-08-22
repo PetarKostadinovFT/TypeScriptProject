@@ -1,38 +1,40 @@
 import { Display } from '../src/display/Display';
-import { BaseReader } from '../src/readers/BaseReader';
+import { BaseReader } from '../src/readers/BaseReader.js';
 
 describe('Display', () => {
-    it('should get room data from the reader', async () => {
-        const mockReader: BaseReader = {
-            readData: jest.fn().mockResolvedValue([]),
-        };
-
-        const filePath = './rooms.csv';
-        const display = new Display(mockReader, filePath);
-
-        const result = await display.getRoomData();
-
-        expect(result).toEqual([]);
-        expect(mockReader.readData).toHaveBeenCalledWith(filePath);
+    beforeEach(() => {
+        jest.clearAllMocks();
     });
 
-    it('should handle errors when reading data', async () => {
-        const mockReader: BaseReader = {
-            readData: jest.fn().mockRejectedValue(new Error('Mock Error')),
-        };
+    it('should get room data from reader correctly', async () => {
+        const mockReadData = jest.fn().mockResolvedValue([
+            { number: '101', type: 'Standard', occupancy: 2, price: 100 },
+            { number: '102', type: 'Deluxe', occupancy: 3, price: 150 },
+        ]);
 
-        const filePath = './rooms.csv';
-        const display = new Display(mockReader, filePath);
+        BaseReader.readData = mockReadData;
 
-        const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation();
+        const filePath = '/fake/rooms.csv';
+        const display = new Display(BaseReader, filePath);
+        const rooms = await display.getRoomData();
 
-        const result = await display.getRoomData();
+        expect(mockReadData).toHaveBeenCalledWith(filePath);
+        expect(rooms).toEqual([
+            { number: '101', type: 'Standard', occupancy: 2, price: 100 },
+            { number: '102', type: 'Deluxe', occupancy: 3, price: 150 },
+        ]);
+    });
 
-        expect(result).toEqual([]);
-        expect(mockReader.readData).toHaveBeenCalledWith(filePath);
+    it('should handle reader error gracefully', async () => {
+        const mockReadData = jest.fn().mockRejectedValue(new Error('Reader error'));
 
-        expect(consoleErrorMock).toHaveBeenCalledWith('Error reading and displaying data:', expect.any(Error));
+        BaseReader.readData = mockReadData;
 
-        consoleErrorMock.mockRestore();
+        const filePath = '/fake/rooms.csv';
+        const display = new Display(BaseReader, filePath);
+        const rooms = await display.getRoomData();
+
+        expect(mockReadData).toHaveBeenCalledWith(filePath);
+        expect(rooms).toEqual([]);
     });
 });

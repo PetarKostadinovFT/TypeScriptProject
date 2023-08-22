@@ -6,6 +6,7 @@ describe('JsonReader', () => {
 
     beforeEach(() => {
         fetchMock.mockReset();
+        JsonReader['cachedData'] = {}; // Reset cachedData before each test
     });
 
     afterAll(() => {
@@ -25,10 +26,8 @@ describe('JsonReader', () => {
 
         fetchMock.mockResolvedValue(mockResponse);
 
-        const jsonReader = new JsonReader();
         const filePath = './rooms.json';
-
-        const result = await jsonReader.readData(filePath);
+        const result = await JsonReader.readData(filePath);
 
         expect(result).toEqual(jsonData);
         expect(fetchMock).toHaveBeenCalledWith(filePath);
@@ -39,10 +38,9 @@ describe('JsonReader', () => {
 
         fetchMock.mockResolvedValue(mockResponse);
 
-        const jsonReader = new JsonReader();
         const filePath = './rooms.json';
 
-        await expect(jsonReader.readData(filePath)).rejects.toThrowError(
+        await expect(JsonReader.readData(filePath)).rejects.toThrowError(
             `Failed to fetch JSON data from ${filePath}`
         );
         expect(fetchMock).toHaveBeenCalledWith(filePath);
@@ -54,13 +52,12 @@ describe('JsonReader', () => {
             { number: '102', type: 'Deluxe', occupancy: 3, price: 150 },
         ];
 
-        const jsonReader = new JsonReader();
-        jsonReader['cachedData']['./rooms.json'] = jsonData;
+        JsonReader['cachedData']['./rooms.json'] = jsonData;
 
         fetchMock.mockResolvedValue(new Response(null));
 
         const filePath = './rooms.json';
-        const result = await jsonReader.readData(filePath);
+        const result = await JsonReader.readData(filePath);
 
         expect(result).toEqual(jsonData);
         expect(fetchMock).not.toHaveBeenCalled();

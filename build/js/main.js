@@ -29,7 +29,7 @@ jsonButton?.addEventListener('click', async () => {
         console.error('Error:', error);
     }
 });
-function displayRooms(container, rooms) {
+export function displayRooms(container, rooms) {
     if (!container)
         return;
     container.innerHTML = '';
@@ -49,7 +49,7 @@ function displayRooms(container, rooms) {
         container.appendChild(roomDiv);
     });
 }
-function updateHeaderText(text) {
+export function updateHeaderText(text) {
     if (headerText) {
         headerText.textContent = text;
     }
