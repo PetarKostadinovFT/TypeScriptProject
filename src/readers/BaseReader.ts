@@ -1,4 +1,5 @@
 export abstract class BaseReader {
-  abstract readData(filePath: string): Promise<any[]>;
+  static async readData(filePath: string): Promise<any[]> {
+    throw new Error("This method should be implemented by subclasses");
+  }
 }
-

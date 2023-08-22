@@ -1,8 +1,8 @@
 import { CsvReader } from './readers/CsvReader.js';
 import { JsonReader } from './readers/JsonReader.js';
 import { Display } from './display/Display.js';
-const csvReader = new CsvReader();
-const jsonReader = new JsonReader();
+const csvReader = CsvReader;
+const jsonReader = JsonReader;
 const csvDisplay = new Display(csvReader, './rooms.csv');
 const jsonDisplay = new Display(jsonReader, './rooms.json');
 const csvButton = document.getElementById('csvButton');

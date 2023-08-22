@@ -1,11 +1,12 @@
 import { BaseReader } from '../readers/BaseReader.js';
 import { Room } from '../interfaces/Room.js';
 
+
 export class Display {
-  private reader: BaseReader;
+  private reader: typeof BaseReader;
   private filePath: string;
 
-  constructor(reader: BaseReader, filePath: string) {
+  constructor(reader: typeof BaseReader, filePath: string) {
     this.reader = reader;
     this.filePath = filePath;
   }
@@ -20,4 +21,8 @@ export class Display {
     }
   }
 }
+
+
+
+
 

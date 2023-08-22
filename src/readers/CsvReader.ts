@@ -2,11 +2,11 @@ import { BaseReader } from './BaseReader.js';
 import { Room } from '../interfaces/Room.js';
 
 export class CsvReader extends BaseReader {
-  private cachedData: Room[] | null = null;
+  private static cachedData: Room[] | null = null;
 
-  async readData(filePath: string): Promise<Room[]> {
-    if (this.cachedData) {
-      return this.cachedData;
+  static async readData(filePath: string): Promise<Room[]> {
+    if (CsvReader.cachedData) {
+      return CsvReader.cachedData;
     }
 
     const response = await fetch(filePath);
@@ -35,7 +35,7 @@ export class CsvReader extends BaseReader {
       data.push(room);
     }
 
-    this.cachedData = data;
+    CsvReader.cachedData = data;
     return data;
   }
 }

@@ -1,12 +1,8 @@
 import { BaseReader } from './BaseReader.js';
 export class CsvReader extends BaseReader {
-    constructor() {
-        super(...arguments);
-        this.cachedData = null;
-    }
-    async readData(filePath) {
-        if (this.cachedData) {
-            return this.cachedData;
+    static async readData(filePath) {
+        if (CsvReader.cachedData) {
+            return CsvReader.cachedData;
         }
         const response = await fetch(filePath);
         if (!response.ok) {
@@ -28,7 +24,8 @@ export class CsvReader extends BaseReader {
             };
             data.push(room);
         }
-        this.cachedData = data;
+        CsvReader.cachedData = data;
         return data;
     }
 }
+CsvReader.cachedData = null;
