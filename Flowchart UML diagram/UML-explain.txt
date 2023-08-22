@@ -1,0 +1,15 @@
+
+UML Diagram Explanation
+
+* Display is the class that interacts with both CsvReader and JsonReader to fetch room data. 
+    t takes a BaseReader instance (which could be an instance of CsvReader or JsonReader) and a file path as parameters. 
+    The getRoomData method fetches and returns room data.
+
+* BaseReader is an abstract class that defines the basic structure for classes that read data from different file formats.
+    It has an abstract method readData that needs to be implemented by subclasses.
+
+* CsvReader and JsonReader are subclasses of BaseReader. 
+    They implement the readData method to read data from CSV and JSON files, respectively. 
+    CsvReader also includes a cachedData property to store parsed CSV data.
+
+* Room is the interface that describes the structure of room data.
